@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- NO index for search engines -->
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Private Vault — Sahar Technology</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    /* ── PIN OVERLAY ── */
+    #vaultOverlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pin-box {
+      background: var(--bg3);
+      border: 1px solid var(--border-hover);
+      border-radius: 20px; padding: 3rem 2.5rem;
+      width: 100%; max-width: 400px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .pin-box::before {
+      content: '';
+      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, var(--blue-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .lock-icon {
+      font-size: 2.5rem; margin-bottom: 1rem;
+      position: relative; z-index: 1;
+    }
+    .pin-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 0.5rem;
+      position: relative; z-index: 1;
+    }
+    .pin-sub {
+      color: var(--text-muted); font-size: 0.88rem;
+      margin-bottom: 2rem; position: relative; z-index: 1;
+    }
+    #pinInput {
+      width: 100%; background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text); font-family: var(--font-mono);
+      font-size: 1.6rem; letter-spacing: 0.3em;
+      padding: 14px; text-align: center;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 1rem; position: relative; z-index: 1;
+    }
+    #pinInput:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+    #pinError {
+      color: #f87171; font-size: 0.82rem;
+      min-height: 1.2rem; margin-bottom: 0.8rem;
+      position: relative; z-index: 1;
+    }
+    .pin-submit {
+      width: 100%; background: var(--blue); color: #fff;
+      border: none; cursor: pointer; padding: 13px;
+      border-radius: var(--radius-pill); font-weight: 600;
+      font-size: 0.9rem; font-family: var(--font-body);
+      transition: opacity 0.2s; position: relative; z-index: 1;
+    }
+    .pin-submit:hover { opacity: 0.85; }
+    .pin-hint {
+      font-size: 0.73rem; color: var(--text-dim);
+      margin-top: 1.2rem; position: relative; z-index: 1;
+    }
+
+    /* ── VAULT CONTENT ── */
+    #vaultContent { min-height: 100vh; }
+    #vault-hero {
+      padding: 140px 5vw 70px;
+      position: relative; overflow: hidden;
+    }
+    .vault-hero-inner { position: relative; z-index: 1; max-width: 640px; }
+    .vault-hero-inner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+    }
+    .vault-hero-inner h1 span { color: var(--blue-bright); }
+    .vault-hero-inner p { color: var(--text-muted); max-width: 480px; }
+
+    /* ── UPLOAD ZONE ── */
+    #vault-main { background: var(--bg2); }
+    .upload-zone {
+      border: 2px dashed var(--border-hover);
+      border-radius: var(--radius);
+      padding: 2.5rem; text-align: center;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 2.5rem; max-width: 640px;
+    }
+    .upload-zone:hover { border-color: var(--blue); background: var(--blue-dim); }
+    .upload-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .upload-title {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem;
+    }
+    .upload-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .upload-btn-label {
+      display: inline-block;
+      background: var(--blue); color: #fff;
+      padding: 9px 22px; border-radius: var(--radius-pill);
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .upload-btn-label:hover { opacity: 0.85; }
+
+    /* ── CERT GALLERY ── */
+    #certEmpty {
+      text-align: center; color: var(--text-dim);
+      font-size: 0.9rem; padding: 3rem; display: none;
+    }
+    #certGallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cert-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .cert-preview {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--bg4);
+      overflow: hidden; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .cert-preview img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .cert-preview.pdf-icon { font-size: 3rem; }
+    .cert-info { padding: 1rem; }
+    .cert-name {
+      font-size: 0.85rem; font-weight: 500;
+      white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis; margin-bottom: 3px;
+    }
+    .cert-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+    .cert-delete {
+      background: none; border: 1px solid rgba(248,113,113,0.25);
+      color: #f87171; font-size: 0.73rem;
+      padding: 4px 10px; border-radius: 5px;
+      cursor: pointer; transition: background 0.2s;
+      font-family: var(--font-body);
+    }
+    .cert-delete:hover { background: rgba(248,113,113,0.1); }
+
+    /* ── LOGOUT ── */
+    .vault-logout {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-muted); font-size: 0.8rem;
+      background: none; border: 1px solid var(--border);
+      padding: 7px 16px; border-radius: var(--radius-pill);
+      cursor: pointer; font-family: var(--font-body);
+      margin-top: 2rem; transition: all 0.2s;
+    }
+    .vault-logout:hover { border-color: #f87171; color: #f87171; }
+  </style>
+</head>
+<body>
+
+  <!-- PIN GUARD OVERLAY -->
+  <div id="vaultOverlay">
+    <div class="pin-box">
+      <div class="lock-icon">🔐</div>
+      <div class="pin-title">Private Vault</div>
+      <p class="pin-sub">This area is private. Enter your PIN to continue.</p>
+      <form id="pinForm">
+        <input type="password" id="pinInput" maxlength="6" inputmode="numeric"
+               placeholder="••••••" autocomplete="off" required/>
+        <div id="pinError"></div>
+        <button type="submit" class="pin-submit">Unlock →</button>
+      </form>
+      <p class="pin-hint">Only the vault owner has access. This page is not indexed by search engines.</p>
+    </div>
+  </div>
+
+  <!-- VAULT CONTENT (shown after PIN unlock) -->
+  <div id="vaultContent">
+
+    <nav>
+      <a href="../index.html" class="nav-brand">
+        <div class="nav-brand-icon">ST</div>
+        <span class="nav-brand-name">Sahar <span>Technology</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="vault.html" class="active">🔒 Vault</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" aria-label="Toggle menu">☰</button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="vault-hero">
+      <div class="grid-bg"></div>
+      <div class="glow-orb glow-blue" style="top:15%;right:10%;"></div>
+      <div class="vault-hero-inner">
+        <span class="section-eyebrow">🔒 Private</span>
+        <h1>Certificate <span>Vault</span></h1>
+        <p>Your private space to upload, store, and manage your certificates and credentials. Only you can see this — it's PIN-protected and not indexed by Google.</p>
+      </div>
+    </section>
+
+    <!-- MAIN VAULT -->
+    <section id="vault-main">
+      <div class="max-w">
+
+        <!-- UPLOAD ZONE -->
+        <div class="upload-zone" onclick="document.getElementById('certUpload').click()">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">Upload Certificate or Document</div>
+          <p class="upload-sub">Click to upload images (JPG, PNG) or PDF certificates. Stored locally on this browser.</p>
+          <span class="upload-btn-label">Choose Files</span>
+          <input type="file" id="certUpload" multiple accept="image/*,.pdf" style="display:none"/>
+        </div>
+
+        <!-- GALLERY -->
+        <p id="certEmpty">No certificates uploaded yet. Click the area above to add your first one.</p>
+        <div id="certGallery"></div>
+
+        <!-- CHANGE PIN TIP -->
+        <div style="margin-top:3rem;padding:1.2rem 1.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);max-width:600px;">
+          <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:0.5rem;">
+            🔑 How to change your PIN
+          </div>
+          <p style="font-size:0.84rem;color:var(--text-muted);margin:0;">
+            Open <code style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text);">js/main.js</code>, find the line
+            <code style="font-family:var(--font-mono);font-size:0.8rem;color:var(--blue);">initVaultGuard('1234'</code> and replace
+            <code style="font-family:var(--font-mono);color:var(--blue);">'1234'</code> with your own PIN. Save and re-upload.
+          </p>
+        </div>
+
+        <!-- LOGOUT -->
+        <button class="vault-logout" onclick="lockVault()">🔒 Lock Vault</button>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">Sahar <span>Technology</span> — Private Vault</div>
+        <div class="footer-copy">🔒 This page is private and not listed publicly.</div>
+      </div>
+    </footer>
+
+  </div><!-- end vaultContent -->
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ← CHANGE '1234' to your own secret PIN below:
+      initVaultGuard('1234', () => {
+        initCertVault();
+      });
+    });
+
+    function lockVault() {
+      sessionStorage.removeItem('vault_unlocked');
+      location.reload();
+    }
+  </script>
+</body>
+</html>

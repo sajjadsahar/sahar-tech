@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Sahar Technology</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    #page-hero {
+      padding: 150px 5vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 600px; }
+    .page-hero-inner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .page-hero-inner h1 span { color: var(--blue-bright); }
+    .page-hero-inner p { color: var(--text-muted); font-size: 1.05rem; max-width: 480px; }
+
+    /* TIMELINE */
+    #story { background: var(--bg2); }
+    .timeline { position: relative; max-width: 720px; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 16px; top: 0; bottom: 0; width: 1px;
+      background: var(--border); z-index: 0;
+    }
+    .tl-item {
+      display: flex; gap: 2rem;
+      margin-bottom: 2.5rem; position: relative; z-index: 1;
+    }
+    .tl-dot {
+      width: 33px; height: 33px; flex-shrink: 0;
+      border-radius: 50%; background: var(--bg3);
+      border: 2px solid var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .tl-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1.4rem; flex: 1;
+      transition: border-color 0.2s;
+    }
+    .tl-content:hover { border-color: var(--border-hover); }
+    .tl-year { font-size: 0.72rem; color: var(--blue); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 4px; text-transform: uppercase; }
+    .tl-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .tl-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* VALUES */
+    #values { background: var(--bg); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+    }
+    .value-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .value-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .value-icon { font-size: 1.6rem; margin-bottom: 0.9rem; }
+    .value-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .value-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* EDUCATION */
+    #education { background: var(--bg2); }
+    .edu-list { max-width: 720px; display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.8rem;
+      border-left: 3px solid var(--blue);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .edu-card:hover { background: var(--card-hover); border-color: var(--border-hover); }
+    .edu-degree { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+    .edu-school { color: var(--blue-bright); font-size: 0.88rem; font-weight: 500; margin-bottom: 8px; }
+    .edu-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .edu-meta span { font-size: 0.78rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-brand-icon">ST</div>
+      <span class="nav-brand-name">Sahar <span>Technology</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-hire">Hire Me</a>
+    <button class="nav-mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section id="page-hero">
+    <div class="grid-bg"></div>
+    <div class="glow-orb glow-blue" style="top:20%;right:10%;"></div>
+    <div class="page-hero-inner">
+      <span class="section-eyebrow">About Me</span>
+      <h1>Sajjad <span>Sahar</span></h1>
+      <p>MERN Stack Developer & AI Engineer. Remote freelancer from Kabul, Afghanistan — building for the world.</p>
+    </div>
+  </section>
+
+  <!-- STORY TIMELINE -->
+  <section id="story">
+    <div class="max-w">
+      <span class="section-eyebrow">My Journey</span>
+      <h2 class="section-title">How I Got Here</h2>
+      <p class="section-sub">From learning my first line of code to building AI-powered products remotely.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot">🖥️</div>
+          <div class="tl-content">
+            <div class="tl-year">2020</div>
+            <div class="tl-title">Started Coding</div>
+            <div class="tl-sub">Wrote my first lines of Python and fell in love with programming. Started with small scripts and algorithms.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🎓</div>
+          <div class="tl-content">
+            <div class="tl-year">2022</div>
+            <div class="tl-title">Joined Riphah International University</div>
+            <div class="tl-sub">Enrolled in Software Engineering at Riphah International University. Began learning data structures, OOP, and software design.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">⚛️</div>
+          <div class="tl-content">
+            <div class="tl-year">2023</div>
+            <div class="tl-title">Mastered MERN Stack</div>
+            <div class="tl-sub">Deep-dived into MongoDB, Express, React, and Node.js. Delivered my first full-stack web applications for real clients.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🤖</div>
+          <div class="tl-content">
+            <div class="tl-year">2024</div>
+            <div class="tl-title">Moved Into AI Engineering</div>
+            <div class="tl-sub">Started integrating LLMs and AI APIs into web products. Built chatbots, AI-powered tools, and automation pipelines.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🚀</div>
+          <div class="tl-content">
+            <div class="tl-year">2025 – Now</div>
+            <div class="tl-title">Launched Sahar Technology</div>
+            <div class="tl-sub">Established my professional brand. Working with remote clients worldwide delivering MERN Stack and AI solutions from Kabul.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="values">
+    <div class="max-w">
+      <span class="section-eyebrow">My Values</span>
+      <h2 class="section-title">How I Work</h2>
+      <p class="section-sub">Principles that guide every project I take on.</p>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">Speed & Quality</div>
+          <div class="value-desc">I believe fast delivery doesn't mean cutting corners. I ship quickly and keep the code clean, tested, and maintainable.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔒</div>
+          <div class="value-title">Security First</div>
+          <div class="value-desc">Authentication, data protection, and secure APIs are always built into my work — never an afterthought.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💬</div>
+          <div class="value-title">Clear Communication</div>
+          <div class="value-desc">I keep clients updated at every step. No surprises, no ghosting — just clear, honest progress reports.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">📦</div>
+          <div class="value-title">Full Ownership</div>
+          <div class="value-desc">I take complete ownership of my deliverables. If something isn't right, I fix it — no excuses.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌱</div>
+          <div class="value-title">Always Learning</div>
+          <div class="value-desc">Technology evolves fast. I keep up with the latest in AI, web development, and best practices so my clients don't have to.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <div class="value-title">Long-term Thinking</div>
+          <div class="value-desc">I build for scale and the future, not just today. Maintainable architecture that grows with your business.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="max-w">
+      <span class="section-eyebrow">Education</span>
+      <h2 class="section-title">Academic Background</h2>
+      <div class="edu-list">
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Science — Software Engineering</div>
+          <div class="edu-school">Riphah International University</div>
+          <div class="edu-meta">
+            <span>📅 2022 – Present</span>
+            <span>📍 Peshawar, Pakistan</span>
+            <span>🎓 In Progress</span>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">FSc Pre-Engineering / Intermediate</div>
+          <div class="edu-school">Higher Secondary School, Afghanistan</div>
+          <div class="edu-meta">
+            <span>📅 2018 – 2020</span>
+            <span>📍 Kabul, Afghanistan</span>
+            <span>✅ Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Sahar <span>Technology</span> — Sajjad Sahar</div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Sahar Technology. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Sahar Technology</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    #page-hero {
+      padding: 150px 5vw 70px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 600px; }
+    .page-hero-inner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .page-hero-inner h1 span { color: var(--blue-bright); }
+    .page-hero-inner p { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* CONTACT LAYOUT */
+    #contact-main { background: var(--bg2); }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem; max-width: 1000px;
+      align-items: start;
+    }
+
+    /* FORM */
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 0.77rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-input, .form-textarea, .form-select {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text); font-family: var(--font-body);
+      font-size: 0.9rem; padding: 11px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+    .form-select option { background: var(--bg3); }
+    .form-textarea { min-height: 140px; resize: vertical; }
+    .btn-submit {
+      background: var(--blue); color: #fff;
+      border: none; cursor: pointer;
+      padding: 13px 28px; border-radius: var(--radius-pill);
+      font-weight: 600; font-size: 0.9rem;
+      font-family: var(--font-body);
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: 0.015em; align-self: flex-start;
+    }
+    .btn-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* CONTACT SIDEBAR */
+    .contact-sidebar { display: flex; flex-direction: column; gap: 0.9rem; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: var(--border-hover); }
+    .c-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px; background: var(--blue-dim);
+      border: 1px solid rgba(0,136,255,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem;
+    }
+    .c-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
+    .c-value { font-size: 0.88rem; color: var(--text); font-weight: 500; word-break: break-all; }
+
+    .availability-box {
+      background: var(--bg3);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1.4rem; margin-top: 0.5rem;
+    }
+    .avail-title {
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--blue); margin-bottom: 0.6rem;
+    }
+    .avail-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; margin-bottom: 4px; }
+    .avail-row span:first-child { color: var(--text-muted); }
+    .avail-badge {
+      font-size: 0.7rem; padding: 2px 9px; border-radius: 4px; font-weight: 600;
+    }
+    .avail-open { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .avail-busy { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+    @media (max-width: 768px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-brand-icon">ST</div>
+      <span class="nav-brand-name">Sahar <span>Technology</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-hire">Hire Me</a>
+    <button class="nav-mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section id="page-hero">
+    <div class="grid-bg"></div>
+    <div class="glow-orb glow-blue" style="top:20%;right:10%;"></div>
+    <div class="page-hero-inner">
+      <span class="section-eyebrow">Get In Touch</span>
+      <h1>Let's <span>Connect</span></h1>
+      <p>Have a project, job offer, or just want to talk tech? Fill out the form and I'll reply within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT MAIN -->
+  <section id="contact-main">
+    <div class="max-w">
+      <div class="contact-wrap">
+
+        <!-- FORM -->
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input class="form-input" type="text" name="name" placeholder="John Doe" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" name="email" placeholder="john@company.com" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What do you need?</label>
+            <select class="form-select" name="subject">
+              <option value="MERN Stack Development — Project Inquiry">MERN Stack Development</option>
+              <option value="AI / Automation — Project Inquiry">AI & Automation</option>
+              <option value="Remote Freelance Engagement — Project Inquiry">Remote Freelance Work</option>
+              <option value="General Inquiry">General Question</option>
+              <option value="Job / Internship Opportunity">Job / Internship Opportunity</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tell me about your project</label>
+            <textarea class="form-textarea" name="message" placeholder="Describe your project, timeline, budget, or anything else you'd like me to know..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message →</button>
+        </form>
+
+        <!-- SIDEBAR -->
+        <div class="contact-sidebar">
+          <a href="mailto:65441@students.riphah.edu.pk" class="contact-item">
+            <div class="c-icon">✉️</div>
+            <div><div class="c-label">Email</div><div class="c-value">65441@students.riphah.edu.pk</div></div>
+          </a>
+          <div class="contact-item">
+            <div class="c-icon">📍</div>
+            <div><div class="c-label">Location</div><div class="c-value">Kabul, Afghanistan (Remote Worldwide)</div></div>
+          </div>
+          <a href="https://github.com/sajjadsahar" target="_blank" class="contact-item">
+            <div class="c-icon">🐙</div>
+            <div><div class="c-label">GitHub</div><div class="c-value">github.com/sajjadsahar</div></div>
+          </a>
+          <a href="https://linkedin.com/in/sajjadsahar" target="_blank" class="contact-item">
+            <div class="c-icon">🔗</div>
+            <div><div class="c-label">LinkedIn</div><div class="c-value">linkedin.com/in/sajjadsahar</div></div>
+          </a>
+
+          <div class="availability-box">
+            <div class="avail-title">Current Availability</div>
+            <div class="avail-row">
+              <span>MERN Stack Projects</span>
+              <span class="avail-badge avail-open">Open</span>
+            </div>
+            <div class="avail-row">
+              <span>AI / Automation</span>
+              <span class="avail-badge avail-open">Open</span>
+            </div>
+            <div class="avail-row">
+              <span>Long-term Contracts</span>
+              <span class="avail-badge avail-open">Open</span>
+            </div>
+            <div class="avail-row">
+              <span>Response Time</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);">Within 24 hrs</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Sahar <span>Technology</span> — Sajjad Sahar</div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+      </div>
+      <div class="footer-copy">© 2026 Sahar Technology. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
